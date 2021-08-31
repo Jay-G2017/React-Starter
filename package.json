@@ -4,5 +4,8 @@
   "description": "react脚手架, 手动一步一步搭建一个react脚手架",
   "main": "index.js",
   "author": "jay.gao",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "7.32.0"
+  }
 }
