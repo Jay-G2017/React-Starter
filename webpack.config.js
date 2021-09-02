@@ -8,7 +8,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
   },
-  devtool: 'source-map',
+  devtool: isProd ? false : 'source-map',
   devServer: {
     port: '3000',
     hot: true,
@@ -19,7 +19,7 @@ module.exports = {
       template: 'public/index.html',
     }),
   ],
-  mode: 'development',
+  mode: isProd ? 'production' : 'development',
   module: {
     rules: [
       {

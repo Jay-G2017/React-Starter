@@ -1,5 +1,5 @@
 import Flat from '../../components/flat';
-import { withRouter, Link, useHistory } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 
 function Home() {
   const history = useHistory();
@@ -7,20 +7,20 @@ function Home() {
     <div>
       <h1>Hello world !</h1>
       <Flat />
-      <h2>
+      <h4>
         <a
           onClick={() =>
-            history.push({ pathname: '/todo', search: '?name=jay' })
+            history.push({ pathname: '/todo', search: '?name=hello' })
           }
           style={{
-            color: '-webkit-link',
+            color: 'rgb(85,26,139)',
             cursor: 'pointer',
             textDecoration: 'underline',
           }}
         >
           Go to Todo
         </a>
-      </h2>
+      </h4>
     </div>
   );
 }
