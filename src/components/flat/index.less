@@ -1,0 +1,56 @@
+@height: 230px;
+
+.card {
+  height: @height;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  background-size: cover !important;
+  background-position: center;
+  color: white;
+  position: relative;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)),
+    url('https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/images/flat3.jpg');
+
+  &.active {
+    border: 10px solid red;
+  }
+}
+.cardUser {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 40px;
+  border-radius: 50%;
+}
+.cardCategory {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+.cardDescription {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+.cardDescription h2 {
+  font-size: 20px;
+}
+.cardDescription p {
+  font-size: 14px;
+  opacity: 0.7;
+  font-weight: lighter;
+}
+.cardLink {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 2;
+  background: black;
+  opacity: 0;
+}
+.cardLink:hover {
+  opacity: 0.1;
+}
