@@ -1,13 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import { createTodo, deleteTodo, fetchTodos } from '../../api';
 import styles from './index.less';
+
 function Todo() {
   const todos = useSelector((state) => state.todo.todos);
   const dispatch = useDispatch();
 
   const [value, setValue] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchTodos().then((res) => {
+      dispatch({ type: 'todo/set', payload: res });
+    });
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -18,6 +26,7 @@ function Todo() {
       <div className={styles.main}>
         <h1>Todo应用(Redux示范)</h1>
         <input
+          disabled={loading}
           className={styles.input}
           value={value}
           onChange={(e) => {
@@ -26,18 +35,21 @@ function Todo() {
           placeholder="请输入名字"
           onKeyPress={(e) => {
             if (e.code === 'Enter') {
-              const value = e.currentTarget.value;
               if (!value) return;
 
-              dispatch({
-                type: 'todo/add',
-                payload: { name: e.currentTarget.value },
+              setLoading(true);
+              createTodo({ name: value }).then(() => {
+                setLoading(false);
+                setValue('');
+                dispatch({
+                  type: 'todo/add',
+                  payload: { name: value },
+                });
               });
-
-              setValue('');
             }
           }}
         />
+        {loading ? <div>loading...</div> : null}
         <div className={styles.todoArea}>
           {todos.length > 0 ? (
             todos.map((todo, index) => (
@@ -48,9 +60,13 @@ function Todo() {
                 </div>
                 <a
                   href="#"
-                  onClick={() =>
-                    dispatch({ type: 'todo/remove', payload: index })
-                  }
+                  onClick={() => {
+                    setLoading(true);
+                    deleteTodo(index).then(() => {
+                      setLoading(false);
+                      dispatch({ type: 'todo/remove', payload: index });
+                    });
+                  }}
                 >
                   delete
                 </a>

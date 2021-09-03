@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const mockRequests = require('./mockRequests');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -12,7 +13,14 @@ module.exports = {
   devServer: {
     port: '3000',
     hot: true,
+    open: false,
     historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: '/',
+      },
+    },
+    onBeforeSetupMiddleware: mockRequests,
   },
   plugins: [
     new HtmlWebpackPlugin({

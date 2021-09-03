@@ -6,6 +6,9 @@ const slice = createSlice({
     todos: [],
   },
   reducers: {
+    set: (state, { payload }) => {
+      state.todos = payload;
+    },
     add: (state, { payload }) => {
       state.todos.push(payload);
     },
